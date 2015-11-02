@@ -1,0 +1,20 @@
+{
+  "name": "express-mongo-docker",
+  "version": "1.0.0",
+  "description": "Example project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mongo",
+    "express",
+    "docker"
+  ],
+  "author": "Patricio Lopez",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.2.4"
+  }
+}
