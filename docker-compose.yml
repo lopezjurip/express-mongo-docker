@@ -1,7 +1,12 @@
+haproxy:
+  image: tutum/haproxy
+  ports:
+    - "80:80"
+  links:
+    - web
+
 web:
   build: .
-  ports:
-    - "80:3000"
   links:
     - mongo
   environment:

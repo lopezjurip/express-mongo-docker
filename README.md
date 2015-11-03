@@ -11,3 +11,9 @@ $ npm install
 ```sh
 $ docker-compose up -d
 ```
+
+### Scaling
+```sh
+$ docker-compose scale web=3
+$ docker-compose up --force-recreate -d
+```
