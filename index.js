@@ -9,10 +9,13 @@ const morgan = require('morgan');
 const app = express();
 
 // Logs
-app.use(morgan(':method :url :response-time'));
+app.use(morgan('dev'));
 
 // Database connection
-mongoose.connect('mongodb://mongo:27017/napoleon');
+mongoose.connect('mongodb://mongo:27017/napoleon', err => {
+  // Try localhost if not running on container
+  if (err) { mongoose.connect('mongodb://localhost:27017/napoleon'); }
+});
 
 // Define model
 const Entry = mongoose.model('Entry', new mongoose.Schema({
@@ -21,14 +24,13 @@ const Entry = mongoose.model('Entry', new mongoose.Schema({
 }));
 
 // Create a default entry
-const entry = new Entry({name: 'Hello world!'})
-entry.save(err => {
+Entry.create({name: 'Hello world!'}, err => {
   if (err) { console.log('Error', err); }
-})
+});
 
 // Routes
 app.get('/', (req, res) => {
-  res.send([entry]);
+  Entry.find({}).then(entries => res.send(entries));
 });
 
 // Start
